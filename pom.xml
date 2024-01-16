@@ -4,13 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- name and version of the module -->
-  <groupId>NameOfModule</groupId>
-  <artifactId>NameOfModule</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <groupId>TwilightStruggle</groupId>
+  <artifactId>TwilightStruggle</artifactId>
+  <version>3.2</version>
 
   <properties>
     <!-- set Vassal version here -->
-    <vassal.version>3.7.5</vassal.version>
+    <vassal.version>3.7.6</vassal.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
