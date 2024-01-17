@@ -32,7 +32,7 @@ public class CardZoomer extends CounterDetailViewer {
 		if (parent != null) {
 			final Point position = parent.getPosition();		
 			map.getStackMetrics().getContents(parent, null, null, boundingBoxes, position.x, position.y);
-			Point coord = map.mapCoordinates(currentMousePosition.getPoint());
+			Point coord = map.componentToMap(currentMousePosition.getPoint());
 			for (int i = 0; i < boundingBoxes.length; ++i) {
 				if (boundingBoxes[i].contains(coord)) {
 					target = parent.getPieceAt(i);

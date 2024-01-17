@@ -42,7 +42,7 @@ public class TSPlayerRoster extends PlayerRoster {
 	      a.execute();
 	      GameModule.getGameModule().getServer().sendToOthers(a);
 	    }
-	    retireButton.setVisible(getMySide() != null);
+		getLaunchButton().setVisible(getMySide() != null);
 	}
 
 	@Override

@@ -94,7 +94,7 @@ public final class TheCambridgeFive extends ChangeInfluence {
 			public boolean isFinished() {
 				if (!super.isFinished()) {
 					return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(
-							GameModule.getGameModule().getFrame(),
+							GameModule.getGameModule().getPlayerWindow(),
 							"You have not placed any Influence.\n"
 							+ "Are you sure you are finished?",
 							getDescription(),

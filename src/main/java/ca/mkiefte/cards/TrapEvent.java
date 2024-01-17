@@ -77,7 +77,7 @@ public abstract class TrapEvent extends CardEvent {
 			comm.execute();
 			CardEvent target = null;
 			if (cards.size() == 0) {
-				JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(), 
+				JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 						"You don't have any appropriate cards to discard.",
 						getDescription(),
 						JOptionPane.INFORMATION_MESSAGE);

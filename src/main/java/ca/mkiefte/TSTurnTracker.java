@@ -93,7 +93,7 @@ public final class TSTurnTracker extends TurnTracker implements SideChangeListen
 		protected void initComponents() {
 			setLayout(new BorderLayout(5, 5));
 			
-			nextButton = new IconButton(IconButton.PLUS_ICON, BUTTON_SIZE);
+			nextButton = new IconButton(IconButton.PLUS_ICON, 22);
 			setNextStroke(nextListener.getNamedKeyStroke());
 			nextButton.setAlignmentY(Component.TOP_ALIGNMENT);
 			nextButton.addActionListener(new ActionListener() {
@@ -212,7 +212,7 @@ public final class TSTurnTracker extends TurnTracker implements SideChangeListen
 		super.addTo(parent);		
 //		launch.setVisible(false);
 		myValue.addTo(GameModule.getGameModule());
-		TSPlayerRoster.addSideChangeListener(this);
+		GameModule.getGameModule().addSideChangeListenerToPlayerRoster(this);
 	}
 
 	@Override
@@ -783,7 +783,7 @@ public final class TSTurnTracker extends TurnTracker implements SideChangeListen
 					&& (hand.getAllCards().size() > 0
 							|| chinaCard.getOwner().equals(me) && !chinaCard.isFlipped())) {
 				hand.getView().getTopLevelAncestor().setVisible(true);
-				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 						"Would you like to play another Action Round?",
 						"Eighth Action Round",
 						JOptionPane.YES_NO_OPTION);
@@ -808,7 +808,7 @@ public final class TSTurnTracker extends TurnTracker implements SideChangeListen
 				if (missileEnvy.isEventInEffect() 
 						&& getCurrentRound() > 0
 						&& missileEnvy.getTargetedPlayer().equals(me)) {
-					JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(), 
+					JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 							new StringBuilder("You must play ").append(missileEnvy.getDescription()).append(" for Ops.").toString(), 
 							missileEnvy.getDescription(), 
 							JOptionPane.INFORMATION_MESSAGE, 
@@ -817,7 +817,7 @@ public final class TSTurnTracker extends TurnTracker implements SideChangeListen
 					state = getCurrentState(me);
 				} else if (hand.getAllCards().size() == 0) {
 					if (chinaCard.getOwner().equals(me) && !chinaCard.isFlipped()) {
-						final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+						final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 								"Do you wish to play The China Card?", 
 								"The China Card", 
 								JOptionPane.YES_NO_OPTION);
@@ -1096,7 +1096,7 @@ public final class TSTurnTracker extends TurnTracker implements SideChangeListen
 	        reportFormat.setProperty(OLD_TURN, savedTurn);
 	        reportFormat.setProperty(NEW_TURN, getTurnString());
 
-	        String s = updateString(reportFormat.getText(), new String[] { "\\n", "\\t" }, new String[] { " - ", " " }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+	        String s = updateString(reportFormat.getText(this, "Editor.TurnTracker.report_default"), new String[] { "\\n", "\\t" }, new String[] { " - ", " " }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	        c = new Chatter.DisplayText(GameModule.getGameModule().getChatter(), "*** "+s);
 	        c.execute();
 	        c.append(new SetTurn(this, savedState));

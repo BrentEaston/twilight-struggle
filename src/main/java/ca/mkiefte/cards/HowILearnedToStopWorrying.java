@@ -83,7 +83,7 @@ public final class HowILearnedToStopWorrying extends CardEvent {
 			if (value.equals(JOptionPane.UNINITIALIZED_VALUE) || value.equals(Utilities.CANCEL)) {
 				if (canUndoEvent())
 					return undoPlayEvent();
-				else if (JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+				else if (JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 						"Are you sure you wish to leave Defcon unchanged?",
 						getDescription(),
 						JOptionPane.YES_NO_OPTION,

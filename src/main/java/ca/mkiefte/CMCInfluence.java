@@ -43,7 +43,7 @@ public class CMCInfluence extends Influence {
 	public Command myKeyEvent(final KeyStroke stroke) {
 		if (stroke.equals(DECREASE_INFLUENCE_KEY) && canCancelCubanMissileCrisis()) {
 			final CubanMissileCrisis cmc = CardEvent.getCard(CubanMissileCrisis.class);
-			final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+			final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 					"Do you wish to cancel Cuban Missile Crisis?",
 					"Cuban Missile Crisis",
 					JOptionPane.YES_NO_OPTION,

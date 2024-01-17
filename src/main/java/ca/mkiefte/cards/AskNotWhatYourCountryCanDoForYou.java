@@ -39,7 +39,7 @@ public final class AskNotWhatYourCountryCanDoForYou extends CardEvent {
 		final Chatter chatter = GameModule.getGameModule().getChatter();
 		Command comm;
 		if (discards == null || discards.isEmpty()) {
-			final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+			final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 					"Are you sure you wish to discard no cards?",
 					getDescription(),
 					JOptionPane.YES_NO_OPTION);

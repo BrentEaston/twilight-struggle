@@ -276,7 +276,7 @@ public abstract class ParentCard extends CardEvent {
 				return playChildCard();
 			} else if (action == ChildCardAction.PLAY_CARD && card.isOpponentsCard()) {
 				if (!card.isEventPlayed() && card.isEventPlayable(whoPlaysChildCard(card))) {
-					JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(),
+					JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 							new StringBuilder(card.getDescription()).append(" Event is played automatically.").toString(),
 							card.getDescription(),
 							JOptionPane.INFORMATION_MESSAGE,
@@ -285,7 +285,7 @@ public abstract class ParentCard extends CardEvent {
 					comm = comm.append(updateState());
 					return comm;
 				} else if (!card.isOpsPlayed()) {
-					JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(),
+					JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 							"Ops are played automatically.",
 							card.getDescription(),
 							JOptionPane.INFORMATION_MESSAGE,

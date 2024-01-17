@@ -64,7 +64,7 @@ public final class CountingPlayerHand extends PlayerHand implements CommandEncod
 
 	public void setVisibility(boolean isVisible) {
 		visibleToAll = isVisible;
-		launchButton.setEnabled(isVisible);
+		getLaunchButton().setEnabled(isVisible);
 		theMap.getTopLevelAncestor().setVisible(isVisible);
 		theMap.revalidate();
 	}
@@ -112,7 +112,7 @@ public final class CountingPlayerHand extends PlayerHand implements CommandEncod
 //			else
 //				builder.append('(c)');
 //		}
-		launchButton.setText(builder.toString());
+		getLaunchButton().setText(builder.toString());
 	}
 
 	@Override

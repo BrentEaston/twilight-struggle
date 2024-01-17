@@ -836,7 +836,7 @@ public abstract class CardEvent extends Decorator implements EditablePiece {
 	
 	protected Command playSpaceRace(final String who) {
 		if (Utilities.TRUE.equals(Utilities.getGlobalProperty("AskSpaceRace").getPropertyValue())) {
-			final int answer = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+			final int answer = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 					new StringBuilder("Are you sure you want to play ").append(getName()).append("\nin the Space Race?\nThis cannot be undone.").toString(), 
 					"Space Race", 
 					JOptionPane.YES_NO_CANCEL_OPTION, 
@@ -1036,7 +1036,7 @@ public abstract class CardEvent extends Decorator implements EditablePiece {
 			final boolean mayNotBeHeld = getCard(card).isScoringCard();
 			if (mayNotBeHeld && ++nScoringCards >= nRoundsRemaining) {
 				return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(
-						GameModule.getGameModule().getFrame(),
+						GameModule.getGameModule().getPlayerWindow(),
 						"You have more Scoring Cards then there are rounds left in the Turn\n"
 						+ "Are you sure you want to play this card and risk holding a Scoring Card"
 						+ "at the end of the Turn?", 
@@ -1090,7 +1090,7 @@ public abstract class CardEvent extends Decorator implements EditablePiece {
 		if (message == null)
 			message = "Select a card:";
 		if (options == null || options.isEmpty()) {
-			JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(),
+			JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 					"There are no cards for you to select!", 
 					title, JOptionPane.INFORMATION_MESSAGE);
 			return null;
@@ -1196,7 +1196,7 @@ public abstract class CardEvent extends Decorator implements EditablePiece {
 				}
 			});
 			if (pieces.size() != 1) {
-				JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(), 
+				JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 						"The current game is in an illegal state\n" +
 						"It may help to resync the game (or it may not).\n" +
 						"After the following dialog which reports an error,\n" +
@@ -1224,7 +1224,7 @@ public abstract class CardEvent extends Decorator implements EditablePiece {
 				}
 			});
 			if (pieces.size() != 1) {
-				JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(), 
+				JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 						"The current game is in an illegal state\n" +
 						"It may help to resync the game (or it may not).\n" +
 						"After the following dialog which reports an error,\n" +

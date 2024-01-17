@@ -60,7 +60,7 @@ public final class Blockade extends CardEvent {
 				}}, true));
 			discarded = CountingPlayerHand.getHand(TSPlayerRoster.US).countCards() != nCards;
 			if (!discarded && nCards > 0) {
-				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 						"Are you sure you want to remove all Influence in W. Germany?",
 						getDescription(),
 						JOptionPane.YES_NO_OPTION);

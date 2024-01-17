@@ -66,11 +66,12 @@ import VASSAL.counters.Properties;
 import VASSAL.i18n.PieceI18nData;
 import VASSAL.i18n.TranslatablePiece;
 import VASSAL.tools.FormattedString;
-import VASSAL.tools.HashCode;
 import VASSAL.tools.SequenceEncoder;
 import VASSAL.tools.image.ImageUtils;
 import VASSAL.tools.imageop.AbstractTileOpImpl;
 import VASSAL.tools.imageop.ScaledImagePainter;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Displays a text label, with content specified by the user at runtime.
@@ -78,8 +79,8 @@ import VASSAL.tools.imageop.ScaledImagePainter;
 @SuppressWarnings("deprecation")
 public final class ConditionalLabeler extends Decorator implements TranslatablePiece {
   public static final String ID = "condlabel;";
-  protected Color textBg = Color.black;
-  protected Color textFg = Color.white;
+  private Color textBg = Color.black;
+  private Color textFg = Color.white;
 
   public static final int CENTER = 0;
   public static final int RIGHT = 1;
@@ -94,15 +95,15 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
   private String lastCachedLabel;
   private KeyStroke labelKey;
   private String menuCommand = "Change Label";
-  private Font font = new Font("Dialog", 0, 10);
+  private Font font = new Font("Dialog", Font.PLAIN, 10);
   private KeyCommand[] commands;
-  private FormattedString nameFormat = new FormattedString("$" + PIECE_NAME + "$ ($" + LABEL + "$)");
-  private FormattedString labelFormat = new FormattedString("");
+  private final FormattedString nameFormat = new FormattedString("$" + PIECE_NAME + "$ ($" + LABEL + "$)");
+  private final FormattedString labelFormat = new FormattedString("");
   private static final String PIECE_NAME = "pieceName";
   private static final String LABEL = "label";
-  protected PropertyExpression propertyMatch = new PropertyExpression();
+  private final PropertyExpression propertyMatch = new PropertyExpression();
 
-  protected ScaledImagePainter imagePainter = new ScaledImagePainter();
+  private final ScaledImagePainter imagePainter = new ScaledImagePainter();
 
   private char verticalJust = 'b';
   private char horizontalJust = 'c';
@@ -110,9 +111,9 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
   private char horizontalPos = 'c';
   private int verticalOffset = 0;
   private int horizontalOffset = 0;
-  protected int rotateDegrees;
-  protected String propertyName;
-  protected KeyCommand menuKeyCommand;
+  private int rotateDegrees;
+  private String propertyName;
+  private KeyCommand menuKeyCommand;
 
   private Point position = null; // Label position cache
   
@@ -207,7 +208,7 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
   }
 
   public String getName() {
-    if (label.length() == 0) {
+    if (label.isEmpty()) {
       return piece.getName();
     }
     else {
@@ -218,7 +219,7 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
   }
   
   public String getLocalizedName() {
-    if (label.length() == 0) {
+    if (label.isEmpty()) {
       return piece.getLocalizedName();
     }
     else {
@@ -230,12 +231,10 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
     }
   }
 
-  protected boolean matchesFilter() {
+  private boolean matchesFilter() {
 	  GamePiece outer = Decorator.getOutermost(this);
 	  if (!propertyMatch.isNull()) {
-		  if (!propertyMatch.accept(outer)) {
-			  return false;
-		  }
+      return propertyMatch.accept(outer);
 	  }
 	  return true;
   }
@@ -428,10 +427,11 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
       this.font = font;
       this.fg = fg;
       this.bg = bg;
-      hash = HashCode.hash(txt) ^
-             HashCode.hash(font) ^
-             HashCode.hash(fg) ^
-             HashCode.hash(bg);
+      hash = new HashCodeBuilder().append(txt)
+        .append(font)
+        .append(fg)
+        .append(bg)
+        .toHashCode();
     }
 
     public List<VASSAL.tools.opcache.Op<?>> getSources() {
@@ -686,7 +686,7 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
       controls.add(b);
 
       b = Box.createHorizontalBox();
-      fontSize = new IntConfigurer(null, "Font size:  ", new Integer(l.font.getSize()));
+      fontSize = new IntConfigurer(null, "Font size:  ", l.font.getSize());
       b.add(fontSize.getControls());
       b.add(new JLabel("  Bold?"));
       final int fontStyle = l.font.getStyle();
@@ -709,21 +709,17 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
 
       renderer = new MyRenderer();
 
-      final Character[] rightLeft = new Character[]{new Character('c'),
-                                                    new Character('r'),
-                                                    new Character('l')};
+      final Character[] rightLeft = new Character[] {'c', 'r', 'l'};
 
-      final Character[] topBottom = new Character[]{new Character('c'),
-                                                    new Character('t'),
-                                                    new Character('b')};
+      final Character[] topBottom = new Character[] {'c', 't', 'b'};
 
       b = Box.createHorizontalBox();
       b.add(new JLabel("Vertical position:  "));
       vPos = new JComboBox(topBottom);
       vPos.setRenderer(renderer);
-      vPos.setSelectedItem(new Character(l.verticalPos));
+      vPos.setSelectedItem(l.verticalPos);
       b.add(vPos);
-      vOff = new IntConfigurer(null, "  Offset:  ", new Integer(l.verticalOffset));
+      vOff = new IntConfigurer(null, "  Offset:  ", l.verticalOffset);
       b.add(vOff.getControls());
       controls.add(b);
 
@@ -731,9 +727,9 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
       b.add(new JLabel("Horizontal position:  "));
       hPos = new JComboBox(rightLeft);
       hPos.setRenderer(renderer);
-      hPos.setSelectedItem(new Character(l.horizontalPos));
+      hPos.setSelectedItem(l.horizontalPos);
       b.add(hPos);
-      hOff = new IntConfigurer(null, "  Offset:  ", new Integer(l.horizontalOffset));
+      hOff = new IntConfigurer(null, "  Offset:  ", l.horizontalOffset);
       b.add(hOff.getControls());
       controls.add(b);
 
@@ -741,7 +737,7 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
       b.add(new JLabel("Vertical text justification:  "));
       vJust = new JComboBox(topBottom);
       vJust.setRenderer(renderer);
-      vJust.setSelectedItem(new Character(l.verticalJust));
+      vJust.setSelectedItem(l.verticalJust);
       b.add(vJust);
       controls.add(b);
 
@@ -749,11 +745,11 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
       b.add(new JLabel("Horizontal text justification:  "));
       hJust = new JComboBox(rightLeft);
       hJust.setRenderer(renderer);
-      hJust.setSelectedItem(new Character(l.horizontalJust));
+      hJust.setSelectedItem(l.horizontalJust);
       b.add(hJust);
       controls.add(b);
 
-      rotate = new IntConfigurer(null, "Rotate Text (Degrees):  ", new Integer(l.rotateDegrees));
+      rotate = new IntConfigurer(null, "Rotate Text (Degrees):  ", l.rotateDegrees);
       controls.add(rotate.getControls());
 
       propertyNameConfig = new StringConfigurer(null, "Property Name:  ", l.propertyName);
@@ -771,8 +767,8 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
 
       Integer i = (Integer) fontSize.getValue();
       if (i == null
-          || i.intValue() <= 0) {
-        i = new Integer(10);
+          || i <= 0) {
+        i = 10;
       }
       se.append(i.toString())
         .append(bg.getValueString())
@@ -780,13 +776,13 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
         .append(vPos.getSelectedItem().toString());
       i = (Integer) vOff.getValue();
       if (i == null) {
-        i = new Integer(0);
+        i = 0;
       }
       se.append(i.toString())
         .append(hPos.getSelectedItem().toString());
       i = (Integer) hOff.getValue();
       if (i == null) {
-        i = new Integer(0);
+        i = 0;
       }
       se.append(i.toString())
         .append(vJust.getSelectedItem().toString())
@@ -799,7 +795,7 @@ public final class ConditionalLabeler extends Decorator implements TranslatableP
       se.append(style + "");
       i = (Integer) rotate.getValue();
       if (i == null) {
-        i = new Integer(0);
+        i = 0;
       }
       se.append(i.toString())
         .append(propertyNameConfig.getValueString());

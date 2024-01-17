@@ -158,7 +158,7 @@ public final class CustomCounterFactory extends BasicCommandEncoder {
 	    
 	    d = super.createDecorator(type,inner);
 	    if (!d.getType().startsWith(prefix)) {
-	    	JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(), 
+	    	JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(),
 	    			"You are attempting to synchronize with an incompatible module version.\nVASSAL will now exit to protect the ongoing game.", 
 	    			"Incompatible Module Versions", 
 	    			JOptionPane.ERROR_MESSAGE);

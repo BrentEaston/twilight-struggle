@@ -106,7 +106,7 @@ public final class DeStalinization extends ChangeInfluence {
 					final StringBuilder builder = new StringBuilder("You have only relocated ").append(removed).append(" Influence.\n"
 							+ "Are you sure you are finished?");
 					return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(
-							GameModule.getGameModule().getFrame(),
+							GameModule.getGameModule().getPlayerWindow(),
 							builder.toString(),
 							getDescription(),
 							JOptionPane.YES_NO_OPTION, 

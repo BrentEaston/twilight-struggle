@@ -408,7 +408,7 @@ public class Influence extends Decorator implements EditablePiece {
 					&& marker.isBattleground 
 					&& TSPlayerRoster.getMySide().equals(Utilities.getActivePlayer())
 					&& (!CardEvent.getCard(NuclearSubs.class).isEventInEffect() || TSPlayerRoster.USSR.equals(who))) {
-				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(), 
+				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 						"DEFCON is currently at 2 and you are about to\n" +
 						"attempt a coup in a Battleground country.\n" +
 						"Are you sure you want to attempt a coup?",
@@ -419,7 +419,7 @@ public class Influence extends Decorator implements EditablePiece {
 			} 
 			final CubanMissileCrisis cmc = CardEvent.getCard(CubanMissileCrisis.class);
 			if (cmc.isEventInEffect() && cmc.getTarget().equals(TSPlayerRoster.getMySide())) {
-				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getFrame(),
+				final int n = JOptionPane.showConfirmDialog(GameModule.getGameModule().getPlayerWindow(),
 						new StringBuilder(cmc.getDescription()).append(" is still in effect.\n" +
 								"Are you sure you want to attempt a coup?").toString(),
 						cmc.getDescription(),
@@ -512,7 +512,7 @@ public class Influence extends Decorator implements EditablePiece {
 				return false;
 			else
 				return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(
-						GameModule.getGameModule().getFrame(),
+						GameModule.getGameModule().getPlayerWindow(),
 						"You have not used all available Influence points.\n"
 								+ "Are you sure you are finished?",
 								event.getDescription(),
@@ -689,7 +689,7 @@ public class Influence extends Decorator implements EditablePiece {
 					} else if (value.equals(CANCEL)) {
 						final String usedAs = Delegate.usedAs.getPropertyValue();
 						if (!usedAs.isEmpty() && !usedAs.equals(PLACE_INFLUENCE) && !usedAs.equals(REMOVE_INFLUENCE))
-							JOptionPane.showMessageDialog(GameModule.getGameModule().getFrame(), "You cannot undo play of Operations after Realignment or Coup attempts.", "Cannot Cancel", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(GameModule.getGameModule().getPlayerWindow(), "You cannot undo play of Operations after Realignment or Coup attempts.", "Cannot Cancel", JOptionPane.ERROR_MESSAGE);
 						else {
 							final Command comm = cancel();
 							GameModule.getGameModule().sendAndLog(comm);
@@ -707,7 +707,7 @@ public class Influence extends Decorator implements EditablePiece {
 							if (options.size() == 1)
 								propertyValue = options.get(0);
 							else {
-								final int n = JOptionPane.showOptionDialog(GameModule.getGameModule().getFrame(),
+								final int n = JOptionPane.showOptionDialog(GameModule.getGameModule().getPlayerWindow(),
 										"Use this option to show where you can\n"
 										+ "conduct Operations. For which type of\n"
 										+ "Operations do you want to see?", 
@@ -1687,7 +1687,7 @@ public class Influence extends Decorator implements EditablePiece {
 		if (message == null)
 			message = "";
 		disposeInluenceDialog();
-		final JFrame frame = GameModule.getGameModule().getFrame();
+		final JFrame frame = GameModule.getGameModule().getPlayerWindow();
 		Influence.delegator = delegator;
 		dialog = new InfluenceDialog(frame, title, message);
 		dialog.setVisible(true);
